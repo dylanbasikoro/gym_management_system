@@ -43,7 +43,7 @@
                         <input type="password" name="password" placeholder="password" required><br>
                     
                         
-                        <button class="btnn"><a href="#">Login</a></button>
+                        <button class="btnn">Login</button>
 
                         <p class="link"> Not Registered<br>
                         <a href="registration.php">Register</a> Here</a></p>
