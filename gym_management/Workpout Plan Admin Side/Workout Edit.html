@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workout Plan </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      resize: vertical;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .saved-info {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .saved-info table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .saved-info th,
+    .saved-info td {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Workout Plan </h1>
+    <form id="workout-form">
+      <label for="exercise">Plan Description:</label>
+      <textarea id="exercise" name="exercise" placeholder="Enter exercise description" required></textarea>
+
+      <label for="duration"> Plan Duration (in weeks):</label>
+      <input type="number" id="duration" name="duration" placeholder="Enter plan duration" required>
+
+      <input type="submit" value="Save">
+    </form>
+
+    <div class="saved-info">
+      <h2>Saved Workout Plans</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Duration (Weeks)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="workout-table-body">
+         
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+   
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const exercise = document.getElementById('exercise').value;
+      const duration = document.getElementById('duration').value;
+
+      
+      const tableBody = document.getElementById('workout-table-body');
+      const newRow = tableBody.insertRow();
+
+      const exerciseCell = newRow.insertCell();
+      const durationCell = newRow.insertCell();
+      const actionCell = newRow.insertCell();
+
+      exerciseCell.textContent = exercise;
+      durationCell.textContent = duration;
+      actionCell.innerHTML = '<button onclick="editRow(this)">Edit</button> <button onclick="deleteRow(this)">Delete</button>';
+
+      
+      document.getElementById('exercise').value = '';
+      document.getElementById('duration').value = '';
+    }
+
+    
+    function editRow(button) {
+      const row = button.parentNode.parentNode;
+      const exerciseCell = row.cells[0];
+      const durationCell = row.cells[1];
+
+      const exerciseInput = document.createElement('textarea');
+      exerciseInput.value = exerciseCell.textContent;
+      exerciseInput.required = true;
+
+      const durationInput = document.createElement('input');
+      durationInput.type = 'number';
+      durationInput.value = durationCell.textContent;
+      durationInput.required = true;
+
+      exerciseCell.textContent = '';
+      durationCell.textContent = '';
+
+      exerciseCell.appendChild(exerciseInput);
+      durationCell.appendChild(durationInput);
+
+     
+      button.textContent = 'Save';
+      button.setAttribute('onclick', 'saveRow(this)');
+    }
+
+  
+    function saveRow(button) {
+      const row = button.parentNode.parentNode;
+
+      const exerciseInput = row.cells[0].querySelector('textarea');
+      const durationInput = row.cells[1].querySelector('input[type="number"]');
+
+      const exercise = exerciseInput.value;
+      const duration = durationInput.value;
+
+     
+      row.cells[0].textContent = exercise;
+      row.cells[1].textContent = duration;
+
+      
+      button.textContent = 'Edit';
+      button.setAttribute('onclick', 'editRow(this)');
+    }
+
+   
+    function deleteRow(button) {
+      const row = button.parentNode.parentNode;
+      row.remove();
+    }
+
+   
+    const form = document.getElementById('workout-form');
+    form.addEventListener('submit', handleFormSubmit);
+  </script>
+</body>
+</html> 
