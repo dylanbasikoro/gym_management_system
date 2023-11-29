@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gym Website</title>
+  <style>
+    /* CSS Styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    
+    p {
+      color: #666;
+    }
+    
+    .schedule {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .session {
+      width: 45%;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .session h2 {
+      color: #333;
+      margin-top: 0;
+    }
+    
+    .session p {
+      margin-bottom: 10px;
+    }
+    
+    .session select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .session button {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .session button:hover {
+      background-color: #555;
+    }
+    
+    .schedule-table {
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .schedule-table h2 {
+      color: #333;
+      margin-top: 0;
+    }
+    
+    .schedule-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+    
+    .schedule-table th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gym Website</h1>
+    <p>Welcome to our gym! Please select your workout schedule below:</p>
+    
+    <div class="schedule">
+      <div class="session">
+        <h2>Morning Session</h2>
+        <p>Open from 5am to 9am</p>
+        <select id="morning-session">
+          <option value="">Select a time slot</option>
+          <option value="5am-6:30am">5am - 6:30am</option>
+          <option value="6:30am-8am">6:30am - 8am</option>
+          <option value="8am-9:30am">8am - 9:30am</option>
+        </select>
+        <button onclick="submitMorningSession()">Submit</button>
+      </div>
+      
+      <div class="session">
+        <h2>Evening Session</h2>
+        <p>Open from 5pm to 8pm</p>
+        <select id="evening-session">
+          <option value="">Select a time slot</option>
+          <option value="5pm-6:30pm">5pm - 6:30pm</option>
+          <option value="6:30pm-8pm">6:30pm - 8pm</option>
+        </select>
+        <button onclick="submitEveningSession()">Submit</button>
+      </div>
+    </div>
+    
+    <div class="schedule-table">
+      <h2>Your Schedule</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Morning Session</th>
+            <th>Evening Session</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-table-body">
+          <!-- Schedule table rows will be dynamically added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <script>
+    // JavaScript Validation and Submission
+    function submitMorningSession() {
+      var morningSession = document.getElementById("morning-session").value;
+      if (morningSession !== "") {
+        var date = new Date().toLocaleDateString();
+        var row = "<tr><td>" + date + "</td><td>" + morningSession + "</td><td></td></tr>";
+        document.getElementById("schedule-table-body").innerHTML += row;
+        document.getElementById("morning-session").value = "";
+      }
+    }
+    
+    function submitEveningSession() {
+      var eveningSession = document.getElementById("evening-session").value;
+      if (eveningSession !== "") {
+        var date = new Date().toLocaleDateString();
+        var row = "<tr><td>" + date + "</td><td></td><td>" + eveningSession + "</td></tr>";
+        document.getElementById("schedule-table-body").innerHTML += row;
+        document.getElementById("evening-session").value = "";
+      }
+    }
+  </script>
+</body>
+</html>

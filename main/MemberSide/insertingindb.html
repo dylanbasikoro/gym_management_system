@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gym Website</title>
+    <style>
+        /* CSS Styling */
+        /* ... (same CSS styling as provided in the code) */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Your Workout Plan</h1>
+        
+        <form action="insert.php" method="POST">
+            <div class="goal-card">
+                <h2>Build Muscle</h2>
+                <input type="hidden" name="goal" value="Build Muscle">
+                <label>Description:</label>
+                <textarea name="description" rows="3" cols="50"></textarea>
+                <label>Duration:</label>
+                <input type="text" name="duration">
+                <label>Session Length:</label>
+                <input type="text" name="session_length">
+                <label>Calories Burnt:</label>
+                <input type="text" name="calories_burnt">
+                <label>Nutrition:</label>
+                <textarea name="nutrition" rows="3" cols="50"></textarea>
+                <button type="submit" class="button">Select Plan</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
